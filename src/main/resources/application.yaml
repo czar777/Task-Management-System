@@ -23,3 +23,8 @@ server:
 logging:
   level:
     root: info
+
+jwt:
+  token:
+    secret: "balonka1"
+    expired: 86400

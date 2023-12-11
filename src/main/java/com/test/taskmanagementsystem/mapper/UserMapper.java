@@ -2,6 +2,7 @@ package com.test.taskmanagementsystem.mapper;
 
 import com.test.taskmanagementsystem.dto.UserDto;
 import com.test.taskmanagementsystem.entity.User;
+import com.test.taskmanagementsystem.security.UserSecurity;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 
@@ -11,4 +12,6 @@ public interface UserMapper {
     UserDto toDto(User user);
 
     User toEntity(UserDto userDto);
+
+    UserSecurity toSecurity(UserDto userDto);
 }

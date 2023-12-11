@@ -1,6 +1,6 @@
 package com.test.taskmanagementsystem.dto;
 
-import com.test.taskmanagementsystem.entity.enums.Role;
+import com.test.taskmanagementsystem.enums.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

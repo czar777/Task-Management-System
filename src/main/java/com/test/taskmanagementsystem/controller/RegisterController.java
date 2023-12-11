@@ -1,7 +1,7 @@
 package com.test.taskmanagementsystem.controller;
 
-import com.test.taskmanagementsystem.service.UserService;
 import com.test.taskmanagementsystem.dto.UserDto;
+import com.test.taskmanagementsystem.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,6 +17,7 @@ public class RegisterController {
 
     @PostMapping
     public UserDto register(@RequestBody UserDto userDto) {
+        System.out.println("krk");
         return userService.register(userDto);
     }
 }

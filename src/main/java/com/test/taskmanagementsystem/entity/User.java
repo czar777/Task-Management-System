@@ -1,6 +1,6 @@
 package com.test.taskmanagementsystem.entity;
 
-import com.test.taskmanagementsystem.entity.enums.Role;
+import com.test.taskmanagementsystem.enums.Role;
 import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;

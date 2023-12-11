@@ -2,7 +2,7 @@ package com.test.taskmanagementsystem.mapper;
 
 import com.test.taskmanagementsystem.dto.UserDto;
 import com.test.taskmanagementsystem.entity.User;
-import com.test.taskmanagementsystem.entity.enums.Role;
+import com.test.taskmanagementsystem.enums.Role;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
