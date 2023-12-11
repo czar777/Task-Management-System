@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/task")
 @RequiredArgsConstructor
@@ -32,7 +34,7 @@ public class TaskController {
     }
 
     @GetMapping("/{id}")
-    public TaskDto get(@PathVariable long id) {
+    public TaskDto getTaskById(@PathVariable long id) {
         return taskService.getTaskById(id);
     }
 
@@ -54,5 +56,25 @@ public class TaskController {
     @PatchMapping("/executor/{id}")
     public void changeExecutor(@PathVariable long id, @RequestParam Long executorId) {
         taskService.changeExecutor(id, executorId);
+    }
+
+    @GetMapping("/page/{offset}/limit/{limit}")
+    public List<TaskDto> getAllTasks(@PathVariable int offset,
+                                     @PathVariable int limit) {
+        return taskService.getAllTasks(offset, limit);
+    }
+
+    @GetMapping("/list-by-author/{id}/page/{offset}/limit/{limit}")
+    public List<TaskDto> getTasksByAuthorId(@PathVariable long id,
+                                            @PathVariable int offset,
+                                            @PathVariable int limit) {
+        return taskService.getAllTasksByAuthorId(id, offset, limit);
+    }
+
+    @GetMapping("/list-by-executor/{id}/page/{offset}/limit/{limit}")
+    public List<TaskDto> getTasksByExecutorId(@PathVariable long id,
+                                              @PathVariable int offset,
+                                              @PathVariable int limit) {
+        return taskService.getAllTasksByExecutorId(id, offset, limit);
     }
 }

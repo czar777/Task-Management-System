@@ -12,8 +12,11 @@ import com.test.taskmanagementsystem.security.UserSecurity;
 import com.test.taskmanagementsystem.security.context.IAuthenticationFacade;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Slf4j
 @Service
@@ -50,7 +53,7 @@ public class TaskService {
     public void updateTask(long id, TaskDto taskDto) {
         userService.existsUser(taskDto.getExecutorId());
         Task task = findTaskById(id);
-        checkAccessDenied(id, task);
+        checkAccessDenied(task);
         taskMapper.update(taskDto, task);
 
         log.info("Task updated: {}", task);
@@ -65,7 +68,7 @@ public class TaskService {
     @Transactional
     public void changeStatus(long id, Status status) {
         Task task = findTaskById(id);
-        checkAccessDenied(id, task);
+        checkAccessDenied(task);
         task.setStatus(status);
 
         log.info("Task status changed: {}", task);
@@ -86,10 +89,38 @@ public class TaskService {
     }
 
 
-    private void checkAccessDenied(long id, Task task) {
+    private void checkAccessDenied(Task task) {
         UserSecurity authentication = authenticationFacade.getAuthentication();
         if (!task.getAuthor().getId().equals(authentication.getId())) {
-            throw new AccessDeniedException("Task not found by id: " + id);
+            throw new AccessDeniedException("Access denied");
         }
+    }
+
+    @Transactional(readOnly = true)
+    public List<TaskDto> getAllTasks(Integer offset, Integer limit) {
+        List<Task> tasks = taskRepository.findAll(PageRequest.of(offset, limit)).getContent();
+        List<TaskDto> taskDtos = taskMapper.toDtoList(tasks);
+
+        log.info("All tasks found (offset: {}, limit: {}): {}", offset, limit, tasks);
+        return taskDtos;
+    }
+
+    @Transactional(readOnly = true)
+    public List<TaskDto> getAllTasksByAuthorId(long id, int offset, int limit) {
+        userService.existsUser(id);
+        List<Task> tasks = taskRepository.findByAuthorId(id, PageRequest.of(offset, limit));
+
+        log.info("Tasks by author found (offset: {}, limit: {}): {}", offset, limit, tasks);
+        return taskMapper.toDtoList(tasks);
+
+    }
+
+    @Transactional(readOnly = true)
+    public List<TaskDto> getAllTasksByExecutorId(long id, int offset, int limit) {
+        userService.existsUser(id);
+        List<Task> tasks = taskRepository.findByExecutorId(id, PageRequest.of(offset, limit));
+
+        log.info("Tasks by executor found (offset: {}, limit: {}): {}", offset, limit, tasks);
+        return taskMapper.toDtoList(tasks);
     }
 }

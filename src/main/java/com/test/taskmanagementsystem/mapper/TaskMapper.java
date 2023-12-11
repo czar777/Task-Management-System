@@ -28,6 +28,8 @@ public interface TaskMapper {
     @Mapping(target = "id", ignore = true)
     void update(TaskDto taskDto, @MappingTarget Task task);
 
+    List<TaskDto> toDtoList(List<Task> tasks);
+
     @Named("toIdList")
     default List<Long> toIdList(List<Comment> tasks) {
         return tasks.stream().map(Comment::getId).toList();
