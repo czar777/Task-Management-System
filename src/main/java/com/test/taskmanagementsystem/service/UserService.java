@@ -62,6 +62,13 @@ public class UserService {
         return userDto;
     }
 
+    public void existsUser(Long id) {
+        if (!userRepository.existsById(id)) {
+            throw new EntityNotFoundException("User not found by id: " + id);
+        }
+        log.info("User exists by id: {}", id);
+    }
+
     @Transactional(readOnly = true)
     public void deleteById(Long id) {
         userRepository.deleteById(id);
