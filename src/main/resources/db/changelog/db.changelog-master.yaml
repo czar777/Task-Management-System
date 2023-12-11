@@ -1,3 +1,5 @@
 databaseChangeLog:
   - include:
-      file: db/changelog/changeset/user_V001_initial.sql
+      file: db/changelog/changeset/task_V001_add_user.sql
+  - include:
+      file: db/changelog/changeset/task_V002_add_comment_task.sql

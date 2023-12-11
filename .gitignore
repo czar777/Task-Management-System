@@ -35,3 +35,6 @@ out/
 
 ### VS Code ###
 .vscode/
+/src/main/generated/com/test/taskmanagementsystem/mapper/TaskMapperImpl.java
+/src/main/generated/com/test/taskmanagementsystem/mapper/UserMapperImpl.java
+/src/main/generated/com/test/taskmanagementsystem/mapper/CommentMapperImpl.java

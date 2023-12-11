@@ -1,38 +1,31 @@
 package com.test.taskmanagementsystem.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.test.taskmanagementsystem.enums.Role;
-import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
-import java.util.Set;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserDto {
+public class CommentDto {
 
     private Long id;
 
-    @NotBlank(message = "First name is required")
-    private String firstName;
+    @NotBlank(message = "Comment content is required")
+    private String content;
 
-    @NotBlank(message = "Last name is required")
-    private String lastName;
+    @NotNull(message = "Author is required")
+    private Long authorId;
 
-    @Email(message = "Invalid email format")
-    private String email;
-
-    @NotBlank(message = "Password is required")
-    private String password;
-
-    private Set<Role> roles;
+    @NotNull(message = "Task is required")
+    private Long taskId;
 
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private LocalDateTime createdAt;

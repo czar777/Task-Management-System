@@ -17,7 +17,6 @@ public class RegisterController {
 
     @PostMapping
     public UserDto register(@RequestBody UserDto userDto) {
-        System.out.println("krk");
         return userService.register(userDto);
     }
 }
